@@ -132,6 +132,11 @@
 
 .panel.with-nav-tabs .panel-heading {
   padding: 5px 5px 0 5px;
+  width: 250px;
+}
+
+.panel.with-nav-tabs .panel-body {
+  padding: 5px 5px 0 5px;
 }
 
 .panel.with-nav-tabs .nav-tabs {
@@ -196,6 +201,7 @@
   height: 400px;
   overflow: scroll;
   padding: 0px;
+  width: 225px;
 }
 
 .list-group-item {

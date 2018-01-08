@@ -7,10 +7,24 @@ class User < ActiveRecord::Base
   has_many :friends, :through => :friendships
   has_many :inverse_friendships, :class_name => "Friendship", :foreign_key => "friend_id"
   has_many :inverse_friends, :through => :inverse_friendships, :source => :user
+  
+  has_many :implyfriendships
+  has_many :implyfriends, :through => :implyfriendships
+  has_many :inverse_implyfriendships, :class_name => "Implyfriendship", :foreign_key => "implyfriend_id"
+  has_many :inverse_implyfriends, :through => :inverse_implyfriendships, :source => :user
 
   before_save :downcase_email
   attr_accessor :remember_token
-  validates :name, presence: true, length: {maximum: 50}
+  validates :name, presence: true, length: {maximum: 50},
+            uniqueness: {case_sensitive: false}
+  
+  #validates_presence_of :name, :message => "用户名不能为空!"
+  #validates_length_of :name, :maximum => 50,  :message => "用户名长度不得长于50位字母或数字!"
+  #validates_uniqueness_of :name,:case_sensitive => false, :message => "该用户名已存在!"
+  #validates_presence_of :password, :message =>"密码不能为空!"
+  #validates_length_of :password, :minimum => 6, :message=>"密码长度不得短于6位字母或数字! " 
+  #validates_format_of :email, :message => "邮箱格式不正确!", :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  #validates_uniqueness_of :email,:case_sensitive => false, :message => "该邮箱已注册!"
 
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i
   validates :email, presence: true, length: {maximum: 255},

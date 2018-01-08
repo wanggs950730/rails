@@ -3,11 +3,17 @@ class ChatsController < ApplicationController
   include ChatsHelper
   respond_to :js, :html
   before_action :logged_in
-  before_action :set_chat, except: [:index, :new, :create]
+  before_action :set_chat, except: [:index, :imply, :new, :create]
   before_action :correct_user, only: :show
 
   def index
     @friends=current_user.friends+current_user.inverse_friends
+    #@implyfriendships=Implyfriendship.find_by(@current_user)
+    @implyfriendships=current_user.implyfriends
+  end
+  
+  def imply
+    @implyfriendships=Implyfriend.find_by(@current_user)
   end
 
   def add_user
@@ -70,6 +76,7 @@ class ChatsController < ApplicationController
     @users_in_chat= @chat.users-[current_user]
     @friends=current_user.friends+current_user.inverse_friends
     @friends_out_chat=@friends-@chat.users
+    @implyfriendships=current_user.implyfriends
   end
 
   private
@@ -80,7 +87,7 @@ class ChatsController < ApplicationController
 
   def logged_in
     unless logged_in?
-      redirect_to root_url, flash: {danger: '请登陆'}
+      redirect_to root_url, flash: {danger: '请登录'}
     end
   end
 

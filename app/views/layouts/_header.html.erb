@@ -2,9 +2,9 @@
   <div class="container-fluid">
 
     <div class="navbar-header">
-      <%= link_to root_path, class: 'navbar-brand', style: "color:white" do %>
+      <div class= "navbar-brand", style="color:white">
           <i class="fa fa-leaf" aria-hidden="true"></i> RailsChat
-      <% end %>
+      </div>
     </div>
 
     <ul class="nav navbar-nav navbar-right">
@@ -18,14 +18,14 @@
           </li>
 
           <li>
-            <%= link_to user_path(current_user), class: "dropbtn" do %>
+            <%= link_to edit_user_path(current_user), class: "dropbtn" do %>
                 <%= current_user.name %> <span class="glyphicon glyphicon-user"></span>
             <% end %>
           </li>
 
           <li>
             <%= link_to sessions_logout_path, method: :delete, class: "dropbtn" do %>
-                loggout <span class="	glyphicon glyphicon-off"></span>
+                loggout <span class="glyphicon glyphicon-log-out"></span>
             <% end %>
           </li>
 

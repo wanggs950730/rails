@@ -54,20 +54,12 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
-
+  
   resources :users do
     collection do
       get :index_json
     end
   end
-  resources :salaries
-  resources :performances
-  resources :announcements
-  resources :materials
-  resources :articles
-  resources :departments
-  resources :companynews
-  resources :vacation
 
   resources :messages do
     collection do
@@ -84,11 +76,17 @@ Rails.application.routes.draw do
   end
 
   resources :friendships
-
+  resources :implyfriendships
+  resources :homes
   root 'homes#home'
 
   get 'sessions/login' => 'sessions#new'
   post 'sessions/login' => 'sessions#create'
   delete 'sessions/logout' => 'sessions#destroy'
+  resources :users
+  patch 'users/update'
+  get 'chats/index'
+  delete 'implyfriendships/destroy'
+
 
 end

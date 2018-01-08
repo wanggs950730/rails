@@ -7,8 +7,9 @@ class CreateUsers < ActiveRecord::Migration
       t.string :password_digest
       t.string :remember_digest
       t.string :sex
-      t.string :phonenumber
       t.string :status
+      t.int :msgnum
+      t.int :implynum
       t.timestamps null: false
     end
   end

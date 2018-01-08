@@ -1,0 +1,169 @@
+<html lang="en">
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+
+<style type="text/css">
+    @charset "utf-8";
+	/* track base Css */
+.container {
+	margin-top:5px;
+}
+.red {
+	color:red;
+}
+#ehong-code-input {
+	width:42px;
+	letter-spacing:2px;
+	margin:0px 8px 0px 0px;
+}
+.ehong-idcode-val {
+	position:relative;
+	padding:1px 4px 1px 4px;
+	top:0px;
+	*top:-3px;
+	letter-spacing:4px;
+	display:inline;
+	cursor:pointer;
+	font-size:16px;
+	font-family:"Courier New",Courier,monospace;
+	text-decoration:none;
+	font-weight:bold;
+}
+.ehong-idcode-val0 {
+	border:solid 1px #A4CDED;
+	background-color:#ECFAFB;
+}
+.ehong-idcode-val1 {
+	border:solid 1px #A4CDED;
+	background-color:#FCEFCF;
+}
+.ehong-idcode-val2 {
+	border:solid 1px #6C9;
+	background-color:#D0F0DF;
+}
+.ehong-idcode-val3 {
+	border:solid 1px #6C9;
+	background-color:#DCDDD8;
+}
+.ehong-idcode-val4 {
+	border:solid 1px #6C9;
+	background-color:#F1DEFF;
+}
+.ehong-idcode-val5 {
+	border:solid 1px #6C9;
+	background-color:#ACE1F1;
+}
+.ehong-code-val-tip {
+	font-size:12px;
+	color:#1098EC;
+	top:0px;
+	*top:-3px;
+	position:relative;
+	margin:0px 0px 0px 4px;
+	cursor:pointer;
+}
+
+</style>
+</head>
+
+
+<div class="container">
+    <div class="col-md-6 col-md-offset-3">
+       <%= form_for @user, html: {class: 'form-horizontal', role: 'form'} do |f| %>
+          <% if @user.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+        
+              <ul>
+              <% @user.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+            
+            <div class="form-group has-feedback">
+                <label>用户名</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <%= f.text_field :name, class: 'form-control',id: 'name', placeholder:"请输入用户名", maxlength:"20" %>
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+            
+            <div class="form-group has-feedback">
+                <label>性别</label><br>
+                 <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-user"></span></span>
+                    <%= f.text_field :sex, class: 'form-control', placeholder:"请输入性别", maxlength:"20" %>
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+            
+            
+            <div class="form-group has-feedback">
+                <label>邮箱</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-cloud"></span></span>
+                    <% if current_user.nil? %>
+                    <%= f.email_field :email, class: 'form-control', placeholder:"请输入邮箱", maxlength:"20" %>
+                    </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+                    <% else %>
+                    <%= f.email_field :email, readonly: 'readonly',class: 'form-control', placeholder:"请输入邮箱", maxlength:"20" %>
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class=" glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+                    <% end %>
+
+            <div class="form-group has-feedback">
+                <label>密码(不少于6位)</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <%= f.password_field :password, class: 'form-control', placeholder:"请输入密码", maxlength:"20" %>
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+            
+            <div class="form-group has-feedback">
+                <label>确认密码</label>
+                <div class="input-group">
+                    <span class="input-group-addon"><span class="glyphicon glyphicon-lock"></span></span>
+                    <%= f.password_field :password_confirmation, class: 'form-control', placeholder:"请再次输入密码", maxlength:"20" %>
+                </div>
+
+                <span style="color:red;display: none;" class="tips"></span>
+                <span style="display: none;" class="glyphicon glyphicon-remove form-control-feedback"></span>
+                <span style="display: none;" class="glyphicon glyphicon-ok form-control-feedback"></span>
+            </div>
+
+            <% if current_user.nil? %>
+            <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> 提交 <% end %>
+            <% else %>
+            <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> 更新 <% end %>
+            <!--<a class='btn btn-success btn-xs' data-method='patch' href="/users/update?:user=<%= current_user %>">update</a>
+            <#%= link_to "update",users_update_path(current_user),:method=>'patch'%>-->
+            <% end %>
+      <% end %>
+    </div>
+  </div>
+

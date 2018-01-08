@@ -3,9 +3,11 @@ class FriendshipsController < ApplicationController
   before_action :logged_in
 
   def create
-    @friendship = current_user.friendships.build(:friend_id => params[:friend_id])
+    @friendship = current_user.friendships.build(:friend_id => params[:user_id])
     if @friendship.save
-      flash[:info] = "添加好友成功"
+      flash[:info] = "好友已添加"
+      @implyfriendship = current_user.implyfriendships.find_by(implyfriend_id: params[:user_id])
+      @implyfriendship.destroy
       redirect_to chats_path
     else
       flash[:error] = "无法添加好友"
@@ -31,7 +33,7 @@ class FriendshipsController < ApplicationController
   private
   def logged_in
     unless logged_in?
-      redirect_to root_url, flash: {danger: '请登陆'}
+      redirect_to root_url, flash: {danger: '请登录'}
     end
   end
 

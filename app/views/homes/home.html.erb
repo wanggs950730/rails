@@ -1,42 +1,92 @@
-<div class="container-fluid">
-  <header class="jumbotron hero-spacer">
-    <h1>A Warm Welcome to Rails Chat!</h1>
-    <p>一个Rails Chat测试版本</p>
 
-    <p>
-      <% if current_user %>
-          hello! <%= current_user.name %>
-      <% else %>
-          <a href="#" class="btn btn-primary btn-large" id="login_panel"> Log in!</a>
-      <% end %>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="../../../../favicon.ico">
 
-    </p>
+    <title>Signin Template for Bootstrap</title>
 
-    <h3>
-      目前功能
-    </h3>
-    <li>聊天室消息即时推送</li>
-    <li>支持查找，添加，删除好友</li>
-    <li>创建私人聊天，也支持多人聊天</li>
-    <li>房主可以拉人，踢人</li>
-    <li>房主能转移房屋权限</li>
-    <h3>
-      TODO
-    </h3>
-    <li>现在的即时推送只限于聊天的消息，其他的推送比如未读信息提醒（包括声音）等还未涉及</li>
-    <li>添加好友需要对方同意，现在是单方面添加</li>
-    <li>用户个人简介还未开发</li>
-    <li>UI界面修改（类似WeChat）</li>
-    <li>管理后台开发</li>
+    <!-- Bootstrap core CSS -->
+    <link href="../../../../dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <h3>
-      Usage
-    </h3>
-    <li>测试账号密码分别为: user1@test.com, password （邮箱后的数字代表不同用户）</li>
-    <li>请用两个浏览器分别登陆不同的用户来测试消息的即使推送，注意这两个用户需要互为好友</li>
+    <!-- Custom styles for this template -->
+    <link href="signin.css" rel="stylesheet">
+    
+<style type="text/css">
+  body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
 
-  </header>
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+.form-signin .form-signin-heading,
+.form-signin .checkbox {
+  margin-bottom: 10px;
+}
+.form-signin .checkbox {
+  font-weight: 400;
+}
+.form-signin .form-control {
+  position: relative;
+  box-sizing: border-box;
+  height: auto;
+  padding: 10px;
+  font-size: 16px;
+}
+.form-signin .form-control:focus {
+  z-index: 2;
+}
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+</style>
+  </head>
+  
 
-  <hr>
-  <hr>
-</div>
+
+  <body>
+
+    <div class="container"  style="padding:40px 400px;">
+      
+      <%= form_for(:session, url: sessions_login_path, method: :post, html: {role: 'form'}) do |f| %>
+      
+        <h2  style="padding:20px 75px;"><%= f.label :email, "Please log in" %></h2>
+        <label>Email</label>
+        <%= f.email_field :email, class: 'form-control', placeholder:"Email..."%>
+        <label>Password</label>
+        <%= f.password_field :password, class: 'form-control', placeholder:"Password..." %>
+        
+        <div class="checkbox">
+          <label>
+            <%= f.check_box :remember_me %> Remember me
+          </label>
+        </div>
+        
+        <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> Log in   <span class="glyphicon glyphicon-log-in"></span> <% end %>
+
+        <% end %>
+        <br>
+       
+        </li>
+        
+        <a class="btn btn-primary btn-block" href="/users/new" role="button">Register</a>
+
+    </div> <!-- /container -->
+  </body>
+</html>

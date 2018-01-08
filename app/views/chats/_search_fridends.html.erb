@@ -52,7 +52,7 @@
                 if (data != "") {
                     $('#result thead').html("<tr><th>姓名</th><th>性别</th><th>联系方式</th><th></th></tr>");
                     $.each(data, function (index, user) {
-                        $('#result tbody').append("<tr><td>" + user.name + "</td><td>" + user.sex + "</td><td>" + user.email + "</td><td><a class='btn btn-success btn-xs' data-method='post' href='/friendships?friend_id=" + user.id + "'>添加</a></td></tr>");
+                        $('#result tbody').append("<tr><td>" + user.name + "</td><td>" + user.sex + "</td><td>" + user.email + "</td><td><a class='btn btn-success btn-xs' data-method='post' href='/implyfriendships?friend_id=" + user.id + "'>添加</a></td></tr>");
                     });
                 } else {
                     $('#result tbody').append("<text>没有找到符合条件的用户</text>")
