@@ -63,29 +63,27 @@
   <body>
 
     <div class="container"  style="padding:40px 400px;">
-      
+      <!--登录-->
       <%= form_for(:session, url: sessions_login_path, method: :post, html: {role: 'form'}) do |f| %>
       
-        <h2  style="padding:20px 75px;"><%= f.label :email, "Please log in" %></h2>
-        <label>Email</label>
+        <h2  style="padding:20px 150px;"><%= f.label :email, "登录" %></h2>
+        <label>邮箱</label>
         <%= f.email_field :email, class: 'form-control', placeholder:"Email..."%>
-        <label>Password</label>
+        <label>密码</label>
         <%= f.password_field :password, class: 'form-control', placeholder:"Password..." %>
         
         <div class="checkbox">
           <label>
-            <%= f.check_box :remember_me %> Remember me
+            <%= f.check_box :remember_me %> 记住密码
           </label>
         </div>
         
-        <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> Log in   <span class="glyphicon glyphicon-log-in"></span> <% end %>
+        <%= button_tag(type: "submit", class: "btn btn-primary btn-block") do %> 登录   <span class="glyphicon glyphicon-log-in"></span> <% end %>
 
         <% end %>
         <br>
-       
         </li>
-        
-        <a class="btn btn-primary btn-block" href="/users/new" role="button">Register</a>
+        <a class="btn btn-primary btn-block" href="/users/new" role="button">注册</a>
 
     </div> <!-- /container -->
   </body>

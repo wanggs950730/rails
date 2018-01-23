@@ -10,6 +10,7 @@ class ChatsController < ApplicationController
     @friends=current_user.friends+current_user.inverse_friends
     #@implyfriendships=Implyfriendship.find_by(@current_user)
     @implyfriendships=current_user.implyfriends
+    #@messages=current_user.messages
   end
   
   def imply

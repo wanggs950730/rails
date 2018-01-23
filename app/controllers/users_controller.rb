@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_url, flash: {success: "新账号注册成功,请登陆"}
+      redirect_to root_url, flash: {success: "新账号注册成功,请登录"}
     else
       flash[:warning] = "账号信息填写有误,请重试"
       render 'new'
@@ -81,7 +81,7 @@ class UsersController < ApplicationController
 # Confirms a logged-in user.
   def logged_in
     unless logged_in?
-      redirect_to root_url, flash: {danger: '请登陆'}
+      redirect_to root_url, flash: {danger: '请登录'}
     end
   end
 

@@ -74,13 +74,20 @@
     <nav class="nav">
     <ul class="nav nav-pills">
       <li class=<%= contact_active %>>
-        <a href="#contact-tab" data-toggle="tab" class="nav-link" style="text-align:center"><i class="fa fa-book"><br>通讯录</i></a>
+        <a href="#contact-tab" data-toggle="tab" class="nav-link" style="text-align:center"><i class="fa fa-user"><br>我的好友</i></a>
       </li>
       <li class=<%= chat_active %>>
-        <a href="#chat-tab" data-toggle="tab" class="nav-link"><i class="fa fa-weixin" style="text-align:center"><br>聊天</i></a>
+        <a href="#chat-tab" data-toggle="tab" class="nav-link"><i class="fa fa-weixin" style="text-align:center"><br>聊天室</i></a>
       </li>
       <li  class=<%= imply_active %>>
-        <a href="#imply-tab" data-toggle="tab" class="nav-link"><i class="fa fa-user" style="text-align:center"><br>申请表<div class="nav-counter nav-counter-green">2</div></i></a>
+        <a href="#imply-tab" data-toggle="tab" class="nav-link"><i class="fa fa-book" style="text-align:center"><br>好友申请
+          <% if @implyfriendships.count==0 %>
+          
+          <% else %>
+          <div class="nav-counter nav-counter-red">
+          <%= @implyfriendships.count %></div>
+          <% end %>
+          </i></a>
       </li>
     </ul>
     </nav>
@@ -107,10 +114,10 @@
                       <% end %>
                   <% end %>
                   <%= link_to user_path(user), class: 'btn btn-info btn-block', role: "button", style: "border-radius: 0" do %>
-                      <i class="fa fa-angle-right"></i> 用户详情
+                      <i class="fa fa-angle-right"></i> 好友详情
                   <% end %>
                   <%= link_to friendship_path(user), method: :delete, class: 'btn btn-danger btn-block', role: "button", style: "border-radius: 0;margin:0px;" do %>
-                      <i class="fa fa-angle-right"></i> 删除用户
+                      <i class="fa fa-angle-right"></i> 删除好友
                   <% end %>
                 </div>
               </li>
@@ -129,7 +136,7 @@
         </ul>
       </div>
       
-       <div class="tab-pane fade in <%= imply_active %>" id="imply-tab"> 
+      <div class="tab-pane fade in <%= imply_active %>" id="imply-tab"> 
         <ul class="list-group">
           <% @implyfriendships.each do |user| %>
               <li class="list-group-item" style="padding: 0px; margin-bottom: 0px;">
@@ -152,16 +159,20 @@
               </li>
           <% end %>
         </ul>
+        
+               
+        <div class="panel-footer">
+          <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">添加好友
+          </button>
+        </div>
+
+        <%= render "search_fridends" %>
+        
       </div>
       
     </div>
   </div>
 
-  <div class="panel-footer">
-    <button type="button" class="btn btn-info btn-block" data-toggle="modal" data-target="#myModal">添加朋友
-    </button>
-  </div>
 </div>
 
-<%= render "search_fridends" %>
 

@@ -4,16 +4,7 @@ RailsChat是一款由Rails开发的实时Web聊天室，在[Render_sync](https:/
 
 ## Online Demo
 
-![demo](demo.gif)
-
-请点击[这里](http://139.129.209.63:44400/)访问Demo，测试用户登陆账号格式为：
-
-```
-username: user<number>@test.com
-password: password
-```
-
-* 其中number为1到20，代表20个用户，例如使用`user1@test.com`和`password`能登陆用户1，以此类推
+请点击[这里](https://railschat-gaoshengwang.c9users.io)访问Demo;
 
 Note：请用两个浏览器分别登陆不同的用户来测试消息的即使推送，注意这两个用户需要互为好友
 
@@ -24,14 +15,11 @@ Note：请用两个浏览器分别登陆不同的用户来测试消息的即使�
 * 创建私人聊天，也支持多人聊天
 * 房主可以拉人，踢人
 * 房主能转移房屋权限
-
-## Todo
-
-1. 现在的即时推送只限于聊天的消息，其他的推送比如未读信息提醒（包括声音）等还未涉及
-2. 添加好友需要对方同意，现在是单方面添加
-3. 用户个人简介还未开发
-4. UI界面修改（类似WeChat）
-5. 管理后台开发
+* 添加好友需要对方同意
+* 用户个人简介
+* 好友信息查看
+* UI界面修改（类似WeChat）
+* 管理后台开发
 
 ## Usage 
 
@@ -103,15 +91,39 @@ Note：请用两个浏览器分别登陆不同的用户来测试消息的即使�
 3. 需要在两个浏览器中登录不同的账号来检验聊天室功能
 
 
+## 模型测试
+
+以用户模型为例, 位于test/models/user_test.rb, 首先生成一个@user对象，然后assert用户及用户邮箱和密码是否有效，这里的调用valid方法会去检查你的模型中的相关的validates语句是否正确，若@user.valid?为false, 那么此assert会报错，代表"should be valid"这条测试没有通过, 单独运行此测试文件使用rake test test/models/user_test.rb
+<img src="/lib/Snip201809.png">
+
+## 视图和控制器测试
+
+用户登录视图的测试用例，位于test/integration/user_login_test.rb，首先同样生成一个@user模型，这个@user的用户名和密码可以在test/fixtures/users.yml中指定, 然后我们用get方法到达登录页面（sessions_login_path），然后使用post方法提交这个@user的账号密码来登录，如果登录成功，当前应该会跳转至homes控制器下的index方法进行处理，assert_redirected_to能判断这个跳转过程是否发生，然后调用follow_redirect！来紧跟当前的跳转，用assert_template来判读跳转后的视图文件是否为homes/index, 最后在这个视图文件下做一些测试，比如判断这个视图下连接为root_path的个数等等（根据当前登录的角色不同，当前的页面链接会不同，比如admin用户就会有控制面板的链接rails_admin_path，而普通用户没有，因此可以根据链接的个数来判断当前登录用户的角色）
+<img src="/lib/Snip201812.png">
+
+friendship控制器的测试用例，位于test/controller/friendships_controller_test.rb，首先同样生成一个@friendship模型,然后对controller中的create以及destroy功能进行测试
+<img src="/lib/Snip201810.png">
+
+implyfriendship控制器的测试用例，位于test/controller/implyfriendships_controller_test.rb，首先同样生成一个@implyfriendship模型,然后对controller中的create以及destroy功能进行测试
+<img src="/lib/Snip201811.png">
+
 ## 截图
 
-<img src="/lib/Snip20170301_2.png">
+<img src="/lib/Snip201801 .png">
 
-<img src="/lib/Snip20170301_3.png">
+<img src="/lib/Snip201802.png">
 
-<img src="/lib/Snip20170301_4.png">
+<img src="/lib/Snip201803.png">
 
-<img src="/lib/Snip20170301_5.png">
+<img src="/lib/Snip201804.png">
+
+<img src="/lib/Snip201805.png">
+
+<img src="/lib/Snip201806.png">
+
+<img src="/lib/Snip201807.png">
+
+<img src="/lib/Snip201808.png">
 
 
 
